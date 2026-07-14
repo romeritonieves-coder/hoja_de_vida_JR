@@ -1,0 +1,384 @@
+/* =======================================================
+   TOKENS — paleta distinta a la versión "editor de código"
+   ======================================================= */
+:root{
+  --ink:#0A0812;
+  --paper:#F2EEF7;       
+  --paper-dim:#E4DCEE;
+  --text:#241B33;
+  --muted:#8A7F99;
+  --burgundy:#9B3FE0;   
+  --burgundy-dark:#6B2AA3;
+  --gold:#3EC9D6;        
+  --line:#D9CFE6;
+  --line-soft:rgba(155,63,224,0.14);
+}
+
+*{ box-sizing: border-box; }
+
+html{
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+
+
+/* =======================================================
+   TARJETA
+   ======================================================= */
+.window{
+  width: 60%;
+  border-radius: 0.6%;
+  overflow: hidden;
+  background: rgba(250, 246, 239, 0.25);  /* bajé de 0.55 a 0.25 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: rise .7s cubic-bezier(.2,.7,.2,1) both;
+  box-shadow: 0 1.8em 4.4em -1.2em rgba(0,0,0,0.5), 0 0 0 1px var(--line-soft);
+}
+
+@keyframes rise{
+  from{ opacity: 0; transform: translateY(8%); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================================
+   MEMBRETE (antes "barra de editor")
+   La estructura HTML sigue teniendo .window-dots y .tab; en vez de
+   simular una ventana de Mac, aquí se reconvierten en un membrete
+   formal: los tres puntos se ocultan y la pestaña se convierte en
+   una etiqueta con el nombre, en serif itálica.
+   ======================================================= */
+.titlebar{
+  background: linear-gradient(120deg, rgba(95, 208, 236, 0.75) 0%, rgba(74, 47, 133, 0.75) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2.2% 6%;
+  display: flex;
+  align-items: center;
+  gap: 1.8%;
+  border-bottom: 1px solid var(--gold);
+}
+.window-dots{ display: none; }
+
+.tab{
+  background: transparent;
+  color: var(--paper);
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 108%;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+.tab::before{ content: "Curriculum · Vitae "; color: var(--gold); font-style: normal; font-size: 78%; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* =======================================================
+   MAIN
+   ======================================================= */
+main{ padding: 6% 6% 0; }
+
+section{
+  padding: 5% 6%;
+  margin: 0 0 4% 0;
+  background: rgba(250, 246, 239, 0.45);
+  border: 1px solid var(--line-soft);
+  border-radius: 1.2%;
+  border-bottom: none;
+  opacity: 0;
+  animation: fadeUp .6s ease both;
+}
+section:last-of-type{ border-bottom: none; }
+
+.eyebrow{
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 108%;
+  color: var(--burgundy);
+  margin: 0 0 2% 0;
+}
+.eyebrow::before{ content: ""; }
+
+
+section:nth-of-type(1){ animation-delay: .08s; }
+section:nth-of-type(2){ animation-delay: .16s; }
+section:nth-of-type(3){ animation-delay: .24s; }
+section:nth-of-type(4){ animation-delay: .32s; }
+section:nth-of-type(5){ animation-delay: .40s; }
+section:last-of-type{ border-bottom: none; }
+
+@keyframes fadeUp{
+  from{ opacity: 0; transform: translateY(6%); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* títulos de sección: serif con una pequeña regla dorada, en vez del
+   estilo "// comentario" de la versión editor */
+.study-col h2,
+.languages h2,
+.skills h2{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 132%;
+  font-weight: 700;
+  color: var(--burgundy);
+  margin: 0 0 4% 0;
+  padding-bottom: 2%;
+  border-bottom: 2px solid var(--gold);
+  display: inline-block;
+}
+
+/* =======================================================
+   INFORMACION PERSONAL
+   ======================================================= */
+.info{
+  display: flex;
+  gap: 6%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.avatar{
+  width: 22%;
+  min-width: 20%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0;
+  background: linear-gradient(155deg, var(--gold) 0%, var(--burgundy) 100%);
+  box-shadow: 0 0.5em 1.2em -0.5em rgba(75, 210, 240, 0.45);
+}
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+address{ font-style: normal; flex: 1 1 auto; }
+.contact-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5% 0;
+  font-size: 92%;
+  color: var(--text);
+}
+.contact-list li{ font-weight: 500; }
+.contact-list span{ color: var(--burgundy); font-weight: 700; }
+.contact-list a{ color: inherit; text-decoration: none; border-bottom: 1px solid var(--gold); }
+
+/* =======================================================
+   PERFIL PROFESIONAL
+   ======================================================= */
+.profile p:last-child{
+  margin: 0;
+  font-size: 98%;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 100%;
+}
+
+/* =======================================================
+   ESTUDIOS
+   ======================================================= */
+.studies{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 6%;
+}
+.study-col + .study-col{
+  border-left: 1px solid var(--line);
+  padding-left: 6%;
+}
+.entry{ margin: 0 0 5% 0; }
+.entry:last-child{ margin-bottom: 0; }
+.entry .degree{
+  font-weight: 700;
+  font-size: 98%;
+  color: var(--ink);
+  margin: 0;
+}
+.entry .place{
+  font-size: 90%;
+  color: var(--muted);
+  margin: 1% 0 0 0;
+  font-style: italic;
+}
+.entry .years{
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 78%;
+  font-weight: 600;
+  color: var(--burgundy);
+  margin: 2% 0 0 0;
+  display: inline-block;
+  background: var(--paper-dim);
+  padding: 0.3em 0.9em;
+  border-radius: 4%;
+}
+
+/* =======================================================
+   IDIOMAS
+   ======================================================= */
+.languages{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5% 6%;
+  width: 100%;
+}
+.languages h2{ grid-column: 1 / -1; }
+.lang-card{
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  border-radius: 3%;
+  padding: 6% 7%;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.lang-card h3{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: 118%;
+  color: var(--ink);
+  margin: 0 0 6% 0;
+}
+.bar-list{ list-style: none; margin: 0; padding: 0; }
+.bar-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 88%;
+  color: var(--muted);
+  margin: 0 0 7% 0;
+}
+.bar-row:last-child{ margin-bottom: 0; }
+
+/* indicadores en barra rectangular, en vez de los rombos girados
+   de la versión "editor de código" */
+.dotset{
+  /* Igual que .skill-dots, .dotset necesita un ancho propio DEFINIDO para
+     que el width:12% de cada .dot tenga de qué partir. Sin esta línea,
+     el navegador trata el % del hijo como inexistente y colapsa a 0. */
+  display: flex;
+  gap: 6%;
+  width: 45%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dot{
+  width: 12%;
+  min-width: 6%;
+  height: 0.45em;
+  background: var(--line);
+  border-radius: 30%;
+  transform: none;
+}
+.dot.on{ background: var(--gold); }
+
+/* =======================================================
+   HABILIDADES
+   ======================================================= */
+.skills-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4%;
+}
+.skill-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6%;
+}
+.skill-tag{
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 92%;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  text-align: left;
+  margin: 0;
+  transition: color 0.15s ease;
+}
+.skill-row:hover .skill-tag{ color: var(--burgundy); }
+.skill-dots{
+  display: flex;
+  gap: 5%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  width: 30%;
+}
+.skill-dots .dot{
+  width: 14%;
+  height: 0.45em;
+  border-radius: 30%;
+}
+.skill-dots .dot.on{ background: var(--burgundy); }
+
+/* =======================================================
+   BARRA INFERIOR (antes "status bar" tipo VS Code)
+   ======================================================= */
+.statusbar{
+  margin-top: 1%;
+  background: var(--ink);
+  color: var(--paper-dim);
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 92%;
+  padding: 2% 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.statusbar p{ margin: 0; }
+.statusbar .ok{ color: var(--gold); font-weight: 700; font-style: normal; }
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+@media (max-width: 620px){
+  .window{ width: 92%; }
+  main{ padding: 7% 6% 0; }
+  .info{ flex-direction: column; align-items: flex-start; text-align: left; }
+  .studies, .languages{ grid-template-columns: 1fr; gap: 6%; }
+  .study-col + .study-col{
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 6%;
+  }
+  .statusbar{ flex-direction: column; gap: 1.5%; align-items: flex-start; }
+}
+
+@media print{
+  body{ background: #7d0e8e; padding: 0; }
+  .window{ box-shadow: none; width: 100%; border-radius: 0; }
+  section{ animation: none; opacity: 1; }
+  .window{ animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+body{
+  margin: 0;
+  background: url("../media/img/fondop.jpg") center/cover no-repeat fixed;
+  color: var(--text);
+  font-family: "Nunito Sans", sans-serif;
+  padding: 4% 2%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
